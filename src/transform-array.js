@@ -39,7 +39,7 @@ function transform(arr) {
       if (isDiscardNext === true) {			// если флаг "удалить следующий"
         isDiscardNext = false;				// снимаем его
       } else {										// если флага нет -  просто добавляем элемент
-        resultArray.push[i];
+        resultArray.push(arr[i]);
       }
     }
   }
