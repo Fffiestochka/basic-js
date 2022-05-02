@@ -24,7 +24,7 @@ function transform(arr) {
     if (arr[i] === "--discard-next") {     //удалить следующий
       isDiscardNext = true; 					// ничего не добавляем, вешаем флаг
     } else if (arr[i] === "--discard-prev") {   // удалить предыдущий
-      if (arr[i - 2] && arr[i - 2] !== "--discard-next") {        // если предпредыдущий элемент существует и явл.--discard-next
+      if (arr[i - 2] && arr[i - 2] === "--discard-next") {        // если предпредыдущий элемент существует и явл.--discard-next
         continue;  // ничего не делаем - предыдущий уже удален
       } else if (arr[i - 1]) {  // иначе, если существует предыдущий элемент
         resultArray.pop(); 	// удаляем его
