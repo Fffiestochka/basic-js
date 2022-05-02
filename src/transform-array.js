@@ -25,7 +25,7 @@ function transform(arr) {
       isDiscardNext = true; 						// ничего не добавляем, вешаем флаг
     } else if (arr[i] === "--discard-prev") {  // удалить предыдущий
       if (arr[(i - 1)]) {
-        resultArray.pop();
+        resultArray.splice([i - 1], 1);
       }
     } else if (arr[i] === "--double-next") {   // дублировать следующий
       if (arr[(i + 1)]) {
