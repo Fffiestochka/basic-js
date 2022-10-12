@@ -16,44 +16,59 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function repeater(str, options) {
-	let resultString;
-  if (typeof str !== 'string') {
-	  str = +str;
-  }
-  if (typeof options.addition !== "string") {
-    options.addition = +(options.addition);
-  }
+if (typeof str !== 'string') {
+  str = String(str);
+}
+if (typeof options.addition !== 'string' && options.addition !== undefined) {
+  options.addition = String(options.addition);
+}
 
-  if (options.separator === undefined) {
-	options.separator = "+";
-  }
+if (typeof options.separator === 'undefined') {
+  options.separator = '+';
+}
 
-  if (options.additionSeparator === undefined) {
-    options.additionSeparator = "|";
-  }
+if (typeof options.additionSeparator === 'undefined') {
+  options.additionSeparator = '|';
+}
 
-	if (options.repeatTimes === undefined) {
-		 options.repeatTimes = 0;
-	}
-	if (options.additionRepeatTimes === undefined) {
-    options.additionRepeatTimes = 0;
-  }
+if (typeof options.repeatTimes === 'undefined') {
+  options.repeatTimes = 0;
+}
+if (typeof options.additionRepeatTimes === 'undefined') {
+  options.additionRepeatTimes = 0;
+}
 
-   let additionArray = [];
-  for (let i = 0; i <= options.additionRepeatTimes; i++) {
-	  additionArray.push(options.addition);
+let additionArray = [];
+if (options.addition && options.additionRepeatTimes) {
+  for (let i = 0; i < options.additionRepeatTimes; i++) {
+    additionArray.push(options.addition);
   }
-  let additionResultString = additionArray.join(options.additionSeparator);
+}
+let additionResultString = '';
+if (options.addition) {
+  additionResultString = options.additionRepeatTimes
+    ? additionArray.join(options.additionSeparator)
+    : options.addition;
+}
+// console.log('additionResultString', additionResultString);
+// console.log('str', str);
 
-  let strWithAddition = str + additionResultString;
-  let stringArray = [];
-  for (let i = 0; i <= options.repeatTimes; i++) {
-	stringArray.push(strWithAddition);
+let strWithAddition = `${str}${additionResultString}`;
+// console.log('strWithAddition', strWithAddition);
+
+let stringArray = [];
+if (!options.repeatTimes) {
+  stringArray.push(strWithAddition);
+} else {
+  for (let i = 0; i < options.repeatTimes; i++) {
+    stringArray.push(strWithAddition);
   }
-  let result = stringArray.join(options.separator);
-  return result;
+}
+
+let result = stringArray.join(options.separator);
+return result;
 }
 
 module.exports = {
-  repeater
+  repeater,
 };
